@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class MovieActivity extends AppCompatActivity {
 
-    ArrayList<Movie> movies;
+    ArrayList<Movie> movies;//有其他的movie model嗎？
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
 
@@ -29,15 +29,16 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
-        lvItems = (ListView) findViewById(R.id.lvMovies);//什麼意思？
+        lvItems = (ListView) findViewById(R.id.lvMovies);//找出listview的意思？ 為何不用像下面兩個一樣要先new?
         movies = new ArrayList<>();
-        movieAdapter = new MovieArrayAdapter(this, movies);
+        movieAdapter = new MovieArrayAdapter(this, movies);//this是指MovieActivity？
         lvItems.setAdapter(movieAdapter);
 
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
         AsyncHttpClient client = new AsyncHttpClient();
 
+        //看起來在定義方法 是何時會呼叫？new client的時候嗎？
         client.get(url, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -45,7 +46,7 @@ public class MovieActivity extends AppCompatActivity {
 
                 try {
                     movieJsonResults = response.getJSONArray("results");
-                    //movies = Movie.fromJSONArray(movieJsonResults); why要改下面這樣？怕原本的被覆蓋掉？
+                    //movies = Movie.fromJSONArray(movieJsonResults); why這樣會無法出現資料？
                     movies.addAll(Movie.fromJSONArray(movieJsonResults));
                     movieAdapter.notifyDataSetChanged();
                     Log.d("DEBUG", movies.toString());

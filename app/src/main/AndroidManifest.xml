@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zen.flickster">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 為了要使手機能上網嗎？ -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
