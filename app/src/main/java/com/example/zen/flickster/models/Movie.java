@@ -28,11 +28,17 @@ public class Movie {
     public String getOverview() {
         return overview;
     }
+
+    public Double getVote_average() {
+        return vote_average;
+    }
+
     //一定要和API要接的json的key（名稱）,value格式相符？
     String posterPath;
     String backdropPath;
     String originalTitle;
     String overview;
+    Double vote_average;
 
     //為何要加throws JSONException才可以?是什麼意思？ 可以使用jsonObject.getString是內建功能嗎？
     public Movie(JSONObject jsonObject) throws JSONException {
@@ -40,6 +46,7 @@ public class Movie {
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.vote_average = jsonObject.getDouble("vote_average");
     }
 
     //why use static? 因為是針對整個class使用 不是針對某個實例變數使用？ why can use getJSONObject?
