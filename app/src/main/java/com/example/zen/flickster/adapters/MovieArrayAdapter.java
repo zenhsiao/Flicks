@@ -65,9 +65,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         //adjust image for different orientation,但怎麼知道要打這些得到orientation?這些指令是什麼意思？
         if (this.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivImage);
+            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.drawable.coming).into(viewHolder.ivImage);
         }else if (this.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Picasso.with(getContext()).load(movie.getBackdropPath()).into(viewHolder.ivImage);
+            Picasso.with(getContext()).load(movie.getBackdropPath()).placeholder(R.drawable.coming).into(viewHolder.ivImage);
         }
         //return the view
         return convertView;
