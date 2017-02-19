@@ -1,9 +1,12 @@
 package com.example.zen.flickster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.zen.flickster.adapters.MovieArrayAdapter;
@@ -65,5 +68,32 @@ public class MovieActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_title);
+
+        setupListViewListener();
+    }
+
+    private void setupListViewListener(){
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View item, int pos, long id) {
+
+                        // first parameter is the context, second is the class of the activity to launch
+                        Intent i = new Intent(MovieActivity.this, DetailActivity.class);
+                        // put "extras" into the bundle for access in the second activity
+                        Bundle bundle = new Bundle();
+                        int y = (int) id;
+                        Movie movie = movies.get(y);
+
+                        bundle.putString("image", movie.getBackdropPath());
+                        bundle.putString("title", movie.getOriginalTitle());
+                        bundle.putDouble("rating", movie.getVote_average());
+                        bundle.putString("overview", movie.getOverview());
+
+                        i.putExtras(bundle);
+                        // brings up the second activity
+                        startActivity(i);
+                    }
+                });
     }
 }

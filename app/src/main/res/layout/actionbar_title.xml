@@ -9,7 +9,7 @@
         android:layout_gravity="center"
         android:text="Recent Movies"
         android:textColor="#ffffff"
-        android:id="@+id/mytext"
+        android:id="@+id/mybar"
         android:textSize="45sp" />
 
 </LinearLayout>
